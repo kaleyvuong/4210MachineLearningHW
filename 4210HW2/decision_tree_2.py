@@ -31,10 +31,42 @@ for ds in dataSets:
     #Transform the original categorical training features to numbers and add to the 4D array X.
     #For instance Young = 1, Prepresbyopic = 2, Presbyopic = 3, X = [[1, 1, 1, 1], [2, 2, 2, 2], ...]]
     #--> add your Python code here
+    for row in db:
+        features = []
+        # Age
+        if row[0] == "Young":
+            features.append(1)
+        elif row[0] == "Prepresbyopic":
+            features.append(2)
+        elif row[0] == "Presbyopic":
+            features.append(3)
+        # Spectacle Prescription
+        if row[1] == "Myope":
+            features.append(1)
+        elif row[1] == "Hypermetrope":
+            features.append(2)
+        # Astigmatism
+        if row[2] == "Yes":
+            features.append(1)
+        elif row[2] == "No":
+            features.append(2)
+        # Tear Production Rate
+        if row[3] == "Normal":
+            features.append(1)
+        elif row[3] == "Reduced":
+            features.append(2)
+        X.append(features)
+        
 
     #Transform the original categorical training classes to numbers and add to the vector Y.
     #For instance Yes = 1 and No = 2, Y = [1, 1, 2, 2, ...]
     #--> add your Python code here
+
+        if row[4] == "Yes":
+            Y.append(1)
+        elif row[4] == "No":
+            Y.append(2)
+
 
     #Loop your training and test tasks 10 times here
     for i in range (10):
@@ -61,7 +93,3 @@ for ds in dataSets:
     #Print the average accuracy of this model during the 10 runs (training and test set).
     #Your output should be something like that: final accuracy when training on contact_lens_training_1.csv: 0.2
     #--> add your Python code here
-
-
-
-
