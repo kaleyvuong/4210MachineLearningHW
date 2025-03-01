@@ -72,17 +72,50 @@ for ds in dataSets:
     for i in range (10):
 
        #Fitting the decision tree to the data setting max_depth=3
-       clf = tree.DecisionTreeClassifier(criterion = 'entropy', max_depth=5)
-       clf = clf.fit(X, Y)
+        clf = tree.DecisionTreeClassifier(criterion = 'entropy', max_depth=5)
+        clf = clf.fit(X, Y)
 
        #Read the test data and add this data to dbTest
        #--> add your Python code here
+        #Reading the training data in a csv file
+        dbTest = []
 
-       for data in dbTest:
+        with open(ds, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for i, row in enumerate(reader):
+                if i > 0: #skipping the header
+                    dbTest.append (row)
+
+    for data in dbTest:
            #Transform the features of the test instances to numbers following the same strategy done during training,
            #and then use the decision tree to make the class prediction. For instance: class_predicted = clf.predict([[3, 1, 2, 1]])[0]
            #where [0] is used to get an integer as the predicted class label so that you can compare it with the true label
            #--> add your Python code here
+            for data in dbTest:
+                features = []
+                # Age
+                if row[0] == "Young":
+                    features.append(1)
+                elif row[0] == "Prepresbyopic":
+                    features.append(2)
+                elif row[0] == "Presbyopic":
+                    features.append(3)
+                # Spectacle Prescription
+                if row[1] == "Myope":
+                    features.append(1)
+                elif row[1] == "Hypermetrope":
+                    features.append(2)
+                # Astigmatism
+                if row[2] == "Yes":
+                    features.append(1)
+                elif row[2] == "No":
+                    features.append(2)
+                # Tear Production Rate
+                if row[3] == "Normal":
+                    features.append(1)
+                elif row[3] == "Reduced":
+                    features.append(2)
+
 
            #Compare the prediction with the true label (located at data[4]) of the test instance to start calculating the accuracy.
            #--> add your Python code here
